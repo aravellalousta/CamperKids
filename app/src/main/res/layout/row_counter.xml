@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp">
+
+    <!-- Label -->
+    <TextView
+        android:id="@+id/tvLabel"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="8dp"
+        android:textColor="@color/color_on_surface"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Plus button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPlus"
+        style="@style/CounterButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="@string/plus"
+        android:textColor="@color/color_on_primary"
+        android:textSize="20sp"
+        app:cornerRadius="4dp"
+        app:layout_constraintBaseline_toBaselineOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnMinus"
+        style="@style/CounterButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="@string/minus"
+        android:textColor="@color/color_on_primary"
+        android:textSize="20sp"
+        app:cornerRadius="4dp"
+        app:layout_constraintBaseline_toBaselineOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvLabel" />
+
+    <TextView
+        android:id="@+id/tvCount"
+        android:layout_width="15dp"
+        android:layout_height="33dp"
+        android:gravity="center"
+        android:text="@string/counter_text"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnPlus"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toEndOf="@+id/btnMinus"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

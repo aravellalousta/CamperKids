@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_titles">
+        <item>Teenager (Ages 12–16)</item>
+        <item>Child (Ages 6–12)</item>
+        <item>Toddler (Ages 4–6)</item>
+    </string-array>
+</resources>

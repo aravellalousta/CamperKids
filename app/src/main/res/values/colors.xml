@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <color name="color_background">#EAEAEA</color>
+        <color name="color_primary">#C85103</color>           <!-- Primary Button & selected tab underline -->
+        <color name="color_on_primary">#000000</color>        <!-- Text/icons on primary -->
+        <color name="color_secondary">#5C0601</color>         <!-- Secondary (headings, radios, some backgrounds) -->
+        <color name="color_on_secondary">#FFFFFF</color>      <!-- Text/icons on secondary -->
+        <color name="color_tertiary">#A3A3A3</color>          <!-- Secondary buttons -->
+        <color name="color_on_tertiary">#FFFFFF</color>       <!-- Text/icons on tertiary -->
+        <color name="color_surface">#FFFFFF</color>           <!-- Cards, sheets, etc. -->
+        <color name="color_on_surface">#000000</color>        <!-- Main text -->
+</resources>

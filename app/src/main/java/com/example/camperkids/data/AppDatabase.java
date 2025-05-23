@@ -1,0 +1,33 @@
+package com.example.camperkids.data;
+
+import androidx.room.Database;
+import androidx.room.RoomDatabase;
+import com.example.camperkids.data.entities.Region;
+import com.example.camperkids.data.entities.Camp;
+import com.example.camperkids.data.entities.Period;
+import com.example.camperkids.data.entities.CampAvailability;
+import com.example.camperkids.data.entities.User;
+import com.example.camperkids.data.dao.RegionDao;
+import com.example.camperkids.data.dao.CampDao;
+import com.example.camperkids.data.dao.PeriodDao;
+import com.example.camperkids.data.dao.CampAvailabilityDao;
+import com.example.camperkids.data.dao.UserDao;
+
+@Database(
+        entities = {
+                Region.class,
+                Camp.class,
+                Period.class,
+                CampAvailability.class,
+                User.class
+        },
+        version = 1,
+        exportSchema = false
+)
+public abstract class AppDatabase extends RoomDatabase {
+    public abstract RegionDao regionDao();
+    public abstract CampDao campDao();
+    public abstract PeriodDao periodDao();
+    public abstract CampAvailabilityDao campAvailabilityDao();
+    public abstract UserDao userDao();
+}

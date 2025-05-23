@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/Users/aravella/Desktop/camper_kids.db" readonly="0" foreign_keys="0" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2068"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="android_metadata" custom_title="0" dock_id="3" table="4,16:mainandroid_metadata"/><dock_state state="000000ff00000000fd00000001000000020000000000000000fc0100000003fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000000000000000fb000000160064006f0063006b00420072006f00770073006500320100000000ffffffff0000000000000000fb000000160064006f0063006b00420072006f00770073006500330100000000ffffffff0000010100ffffff000000000000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1*">PRAGMA foreign_keys=off;
+
+-- 1) regions
+CREATE TABLE regions_new (
+  id   INTEGER NOT NULL PRIMARY KEY,
+  name TEXT    NOT NULL
+);
+INSERT INTO regions_new(id,name)
+  SELECT id,name FROM regions;
+DROP TABLE regions;
+ALTER TABLE regions_new RENAME TO regions;
+
+-- 2) camps
+CREATE TABLE camps_new (
+  id            INTEGER NOT NULL PRIMARY KEY,
+  name          TEXT    NOT NULL,
+  region_id     INTEGER NOT NULL,
+  village_name  TEXT,
+  rating        REAL    NOT NULL,
+  description   TEXT,
+  FOREIGN KEY(region_id) REFERENCES regions(id) ON DELETE CASCADE
+);
+INSERT INTO camps_new(id,name,region_id,village_name,rating,description)
+  SELECT id,name,region_id,village_name,rating,description FROM camps;
+DROP TABLE camps;
+ALTER TABLE camps_new RENAME TO camps;
+CREATE INDEX idx_camps_region_id ON camps(region_id);
+
+-- 3) periods
+CREATE TABLE periods_new (
+  id         INTEGER NOT NULL PRIMARY KEY,
+  start_date TEXT    NOT NULL,
+  end_date   TEXT    NOT NULL
+);
+INSERT INTO periods_new(id,start_date,end_date)
+  SELECT id,start_date,end_date FROM periods;
+DROP TABLE periods;
+ALTER TABLE periods_new RENAME TO periods;
+
+-- 4) camp_availability
+CREATE TABLE camp_availability_new (
+  id               INTEGER NOT NULL PRIMARY KEY,
+  camp_id          INTEGER NOT NULL,
+  period_id        INTEGER NOT NULL,
+  available_spots  INTEGER NOT NULL,
+  price_teenager   INTEGER NOT NULL,
+  price_child      INTEGER NOT NULL,
+  price_toddler    INTEGER NOT NULL,
+  FOREIGN KEY(camp_id)   REFERENCES camps(id) ON DELETE CASCADE,
+  FOREIGN KEY(period_id) REFERENCES periods(id) ON DELETE CASCADE
+);
+INSERT INTO camp_availability_new(
+  id, camp_id, period_id,
+  available_spots, price_teenager, price_child, price_toddler
+)
+SELECT
+  id, camp_id, period_id,
+  available_spots, price_teenager, price_child, price_toddler
+FROM camp_availability;
+DROP TABLE camp_availability;
+ALTER TABLE camp_availability_new RENAME TO camp_availability;
+CREATE INDEX idx_ca_camp_id   ON camp_availability(camp_id);
+CREATE INDEX idx_ca_period_id ON camp_availability(period_id);
+
+-- 5) user
+CREATE TABLE user_new (
+  id            INTEGER NOT NULL PRIMARY KEY,
+  name          TEXT    NOT NULL,
+  email         TEXT    NOT NULL,
+  phone_number  TEXT
+);
+INSERT INTO user_new(id,name,email,phone_number)
+  SELECT id,name,email,phone_number FROM user;
+DROP TABLE user;
+ALTER TABLE user_new RENAME TO user;
+
+COMMIT;</sql><current_tab id="0"/></tab_sql></sqlb_project>
