@@ -1,6 +1,10 @@
 package com.example.camperkids.data;
 
+import android.app.Application;
+import android.content.Context;
+
 import androidx.room.Database;
+import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import com.example.camperkids.data.entities.Region;
 import com.example.camperkids.data.entities.Camp;
@@ -25,6 +29,7 @@ import com.example.camperkids.data.dao.UserDao;
         exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {
+
     public abstract RegionDao regionDao();
     public abstract CampDao campDao();
     public abstract PeriodDao periodDao();

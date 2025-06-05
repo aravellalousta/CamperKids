@@ -9,4 +9,8 @@ public class Region {
     public int id;
 
     public String name;
+
+    public String getName() {
+        return name;
+    }
 }
