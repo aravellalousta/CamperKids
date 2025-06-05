@@ -9,4 +9,6 @@
         <color name="color_on_tertiary">#FFFFFF</color>       <!-- Text/icons on tertiary -->
         <color name="color_surface">#FFFFFF</color>           <!-- Cards, sheets, etc. -->
         <color name="color_on_surface">#000000</color>        <!-- Main text -->
+        <color name="color_dropdown">#FFEBDF</color>        <!-- Dropdown -->
+
 </resources>

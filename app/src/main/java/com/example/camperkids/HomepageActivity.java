@@ -5,6 +5,8 @@ import static java.sql.Types.NULL;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +37,47 @@ public class HomepageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
+        // Search for Location
+        searchFieldFunctionality();
 
+        // Dropdown with Periods
+        dropdownFunctionality();
+
+
+
+
+        // Setting up the counter titles (Teenager, Child, Toddler)
+        categories = getResources().getStringArray(R.array.category_titles);
+        setupCounter(R.id.rowTeen,      categories[0], newCount -> teenCount  = newCount);
+        setupCounter(R.id.rowChild,     categories[1], newCount -> childCount = newCount);
+        setupCounter(R.id.rowToddler,   categories[2], newCount -> toddCount  = newCount);
+
+
+
+    }
+
+    private void dropdownFunctionality() {
+        AutoCompleteTextView periodDropdown = findViewById(R.id.periodDropdown);
+
+        String[] timePeriods = new String[] {
+                "Period 1 (June 15 - July 30)",
+                "Period 2 (July 1 - July 15)",
+                "Period 3 (July 16 - August 1)"
+        };
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_dropdown_item_1line,
+                timePeriods
+        );
+
+        periodDropdown.setAdapter(adapter);
+        periodDropdown.setDropDownBackgroundResource(R.color.color_dropdown);
+
+
+    }
+
+    private void searchFieldFunctionality() {
         // Searching for locations
         TextInputEditText searchInput = findViewById(R.id.etLocation);
         Button searchButton = findViewById(R.id.btnSearch);
@@ -46,14 +88,13 @@ public class HomepageActivity extends AppCompatActivity {
                 Toast.makeText(this, "Please enter a region name", Toast.LENGTH_SHORT).show();
                 return;
             }
-            // Fetch the users name from the database to display on the welcome message
+
             db = Room.databaseBuilder(
                     getApplicationContext(),
                     AppDatabase.class,
                     "camper_kids.db"
             ).build();
             regionDao = db.regionDao();
-            System.out.println(regionDao);
 
             // Run Room query in background
             Executors.newSingleThreadExecutor().execute(() -> {
@@ -68,17 +109,6 @@ public class HomepageActivity extends AppCompatActivity {
                 }
             });
         });
-
-
-
-        // Setting up the counter titles (Teenager, Child, Toddler)
-        categories = getResources().getStringArray(R.array.category_titles);
-        setupCounter(R.id.rowTeen,      categories[0], newCount -> teenCount  = newCount);
-        setupCounter(R.id.rowChild,     categories[1], newCount -> childCount = newCount);
-        setupCounter(R.id.rowToddler,   categories[2], newCount -> toddCount  = newCount);
-
-
-
     }
 
     // callback interface for count changes
