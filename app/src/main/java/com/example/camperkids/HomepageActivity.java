@@ -29,6 +29,9 @@ import java.util.concurrent.Executors;
 public class HomepageActivity extends AppCompatActivity {
     private AppDatabase db;
     private RegionDao regionDao;
+    private Region region;
+    private String selectedPeriod = null;
+
     private int teenCount, childCount, toddCount;
     private String[] categories;
 
@@ -43,17 +46,17 @@ public class HomepageActivity extends AppCompatActivity {
         // Dropdown with Periods
         dropdownFunctionality();
 
+        // Counters
+        countersFunctionality();
 
+    }
 
-
+    private void countersFunctionality() {
         // Setting up the counter titles (Teenager, Child, Toddler)
         categories = getResources().getStringArray(R.array.category_titles);
         setupCounter(R.id.rowTeen,      categories[0], newCount -> teenCount  = newCount);
         setupCounter(R.id.rowChild,     categories[1], newCount -> childCount = newCount);
         setupCounter(R.id.rowToddler,   categories[2], newCount -> toddCount  = newCount);
-
-
-
     }
 
     private void dropdownFunctionality() {
@@ -74,7 +77,9 @@ public class HomepageActivity extends AppCompatActivity {
         periodDropdown.setAdapter(adapter);
         periodDropdown.setDropDownBackgroundResource(R.color.color_dropdown);
 
-
+        periodDropdown.setOnItemClickListener((parent, view, position, id) -> {
+            selectedPeriod = (String) parent.getItemAtPosition(position);
+        });
     }
 
     private void searchFieldFunctionality() {
@@ -100,15 +105,16 @@ public class HomepageActivity extends AppCompatActivity {
             Executors.newSingleThreadExecutor().execute(() -> {
                 Region region = regionDao.getRegionByName(keyword);
 
-                System.out.println(region);
-
                 if (region == null) {
                     runOnUiThread(() -> Toast.makeText(this, "Region not found", Toast.LENGTH_SHORT).show());
                 } else {
                     runOnUiThread(() -> Toast.makeText(this, "Region exists: " + region.getName(), Toast.LENGTH_SHORT).show());
                 }
+                System.out.println("Region is: " + region.getName() + " period is: " + selectedPeriod);
             });
+
         });
+
     }
 
     // callback interface for count changes
