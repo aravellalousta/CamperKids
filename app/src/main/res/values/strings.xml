@@ -16,4 +16,5 @@
     <string name="selected_location">Selected location</string>
     <string name="selected_visitors">Selected visitors</string>
     <string name="filter">Filter</string>
+    <string name="sorting">Sorting</string>
 </resources>
