@@ -2,6 +2,7 @@ package com.example.camperkids;
 
 import static java.sql.Types.NULL;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -108,9 +109,8 @@ public class HomepageActivity extends AppCompatActivity {
                 if (region == null) {
                     runOnUiThread(() -> Toast.makeText(this, "Region not found", Toast.LENGTH_SHORT).show());
                 } else {
-                    runOnUiThread(() -> Toast.makeText(this, "Region exists: " + region.getName(), Toast.LENGTH_SHORT).show());
+                    startActivity(new Intent(HomepageActivity.this, SearchResultsActivity.class));
                 }
-                System.out.println("Region is: " + region.getName() + " period is: " + selectedPeriod);
             });
 
         });

@@ -8,4 +8,12 @@
     <string name="counter_text">0</string>
     <string name="category_title" />
     <string name="back_button_desc">Back Button</string>
+    <string name="distance_from">Distance</string>
+    <string name="reviews_amount">reviews</string>
+    <string name="kepa_certified_instructors">KEPA Certified Instructors</string>
+    <string name="camp_price">price</string>
+    <string name="selected_time_period">Selected Time Period</string>
+    <string name="selected_location">Selected location</string>
+    <string name="selected_visitors">Selected visitors</string>
+    <string name="filter">Filter</string>
 </resources>
