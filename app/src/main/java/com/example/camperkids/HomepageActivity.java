@@ -109,7 +109,14 @@ public class HomepageActivity extends AppCompatActivity {
                 if (region == null) {
                     runOnUiThread(() -> Toast.makeText(this, "Region not found", Toast.LENGTH_SHORT).show());
                 } else {
-                    startActivity(new Intent(HomepageActivity.this, SearchResultsActivity.class));
+                    Intent intent = new Intent(HomepageActivity.this, SearchResultsActivity.class);
+                    intent.putExtra("region", region); // must be Serializable
+                    intent.putExtra("period", selectedPeriod);
+                    intent.putExtra("teenCount", teenCount);
+                    intent.putExtra("childCount", childCount);
+                    intent.putExtra("toddCount", toddCount);
+                    startActivity(intent);
+
                 }
             });
 
