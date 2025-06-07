@@ -1,10 +1,7 @@
 package com.example.camperkids;
 
-import static java.sql.Types.NULL;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -14,17 +11,13 @@ import android.widget.Toast;
 
 import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 
 import com.example.camperkids.data.AppDatabase;
 import com.example.camperkids.data.dao.RegionDao;
 import com.example.camperkids.data.entities.Region;
-import com.example.camperkids.data.entities.User;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.List;
 import java.util.concurrent.Executors;
 
 public class HomepageActivity extends AppCompatActivity {

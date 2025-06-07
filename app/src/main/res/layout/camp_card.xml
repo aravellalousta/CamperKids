@@ -5,12 +5,14 @@
     android:layout_height="wrap_content"
     android:elevation="4dp"
     android:padding="8dp"
-    app:cardCornerRadius="16dp">
+    app:cardCornerRadius="16dp"
+    android:layout_marginBottom="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
 
         <!-- Camp image -->
         <ImageView

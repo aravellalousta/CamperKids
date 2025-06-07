@@ -23,6 +23,10 @@ public interface RegionDao {
     @Query("SELECT * FROM regions WHERE id = :id LIMIT 1")
     Region getRegionById(int id);
 
+    @Query("SELECT id FROM regions WHERE name = :name COLLATE NOCASE LIMIT 1")
+    int getRegionIdByName(String name);
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertRegion(Region region);
 
