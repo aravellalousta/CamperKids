@@ -92,10 +92,32 @@ public class SearchResultsActivity extends AppCompatActivity {
             cert.setText(R.string.kepa_certified_instructors);
             // price.setText(camp.getPrice()); TODO PRICE NEEDS CAMP AVAILABILITY TABLE
             ratingBar.setRating(camp.getRating().floatValue());
-            // image.setImageResource(camp.getImageRes()); TODO FIND A WAY TO ADD THE IMAGE
+            setCampLogo(camp, image);
 
             // Add the card to the container
             container.addView(card);
+        }
+    }
+
+    private void setCampLogo(Camp camp, ImageView imageView) {
+        String campName = camp.getName().toLowerCase();
+
+        if (campName.contains("ymca")) {
+            imageView.setImageResource(R.drawable.ymca_camp);
+        } else if (campName.contains("skouras")) {
+            imageView.setImageResource(R.drawable.skouras_camp);
+        } else if (campName.contains("happy days")) {
+            imageView.setImageResource(R.drawable.happy_days_camp);
+        } else if (campName.contains("alexandra")) {
+            imageView.setImageResource(R.drawable.alexandra_camp);
+        } else if (campName.contains("evangelical")) {
+            imageView.setImageResource(R.drawable.gexa_katerini_camp);
+        } else if (campName.contains("vrontou")) {
+            imageView.setImageResource(R.drawable.vrontou_camp);
+        } else if (campName.contains("tsaf tsouf")) {
+            imageView.setImageResource(R.drawable.tsaf_tsouf_camp);
+        } else {
+            imageView.setImageResource(R.drawable.camper_kids_logo);
         }
     }
 
