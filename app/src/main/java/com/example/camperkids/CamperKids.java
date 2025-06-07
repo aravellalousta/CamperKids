@@ -15,7 +15,7 @@ public class CamperKids extends Application {
                         AppDatabase.class,
                         "camper_kids.db"
                 )
-                .createFromAsset("databases/camper_kids.sqlite3")
+                .createFromAsset("databases/camper_kids.db")
                 .allowMainThreadQueries()
                 .build();
         //db.getOpenHelper().getWritableDatabase();

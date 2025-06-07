@@ -88,11 +88,7 @@ public class HomepageActivity extends AppCompatActivity {
                 return;
             }
 
-            db = Room.databaseBuilder(
-                    getApplicationContext(),
-                    AppDatabase.class,
-                    "camper_kids.db"
-            ).build();
+            db = AppDatabase.getInstance(getApplicationContext());
             regionDao = db.regionDao();
 
             // Run Room query in background

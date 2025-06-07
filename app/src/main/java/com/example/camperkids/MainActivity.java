@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,11 +44,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Fetch the users name from the database to display on the welcome message
-        db = Room.databaseBuilder(
-                getApplicationContext(),
-                AppDatabase.class,
-                "camper_kids.db"
-        ).build();
+        AppDatabase db = AppDatabase.getInstance(getApplicationContext());
+
+        if (db == null) {
+            Log.e("DB", "AppDatabase instance is null!");
+        } else {
+            Log.e("DB", "AppDatabase instance is NOT NULL!");
+            System.out.println(db);
+        }
+
         userDao = db.userDao();
 
         ioExecutor = Executors.newSingleThreadExecutor();
@@ -84,6 +89,5 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         // clean up
         ioExecutor.shutdown();
-        db.close();
     }
 }

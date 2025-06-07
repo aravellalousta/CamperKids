@@ -25,14 +25,35 @@ import com.example.camperkids.data.dao.UserDao;
                 CampAvailability.class,
                 User.class
         },
-        version = 1,
+        version = 2,
         exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {
+    private static volatile AppDatabase INSTANCE;
 
     public abstract RegionDao regionDao();
     public abstract CampDao campDao();
     public abstract PeriodDao periodDao();
     public abstract CampAvailabilityDao campAvailabilityDao();
     public abstract UserDao userDao();
+
+    public static AppDatabase getInstance(Context context) {
+        if (INSTANCE == null) {
+            synchronized (AppDatabase.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(
+                                    context.getApplicationContext(),
+                                    AppDatabase.class,
+                                    "camper_kids_db.db"
+                            )
+                            .createFromAsset("databases/camper_kids_db.db")
+                            .fallbackToDestructiveMigration() // optional, but prevents schema mismatch crashes
+                            .build();
+                }
+            }
+        }
+        return INSTANCE;
+    }
+
+
 }

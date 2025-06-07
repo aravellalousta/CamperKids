@@ -54,11 +54,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     }
 
     private void displayCamps(Region region) {
-        db = Room.databaseBuilder(
-                getApplicationContext(),
-                AppDatabase.class,
-                "camper_kids.db"
-        ).build();
+        db = AppDatabase.getInstance(getApplicationContext());
 
         regionDao = db.regionDao();
         campDao = db.campDao();
