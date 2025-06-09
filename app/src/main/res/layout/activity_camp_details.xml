@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_background">
 
+    <!-- Toolbar -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardContainer"
         android:layout_width="0dp"
@@ -45,20 +46,22 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
+    <!-- Top Image -->
     <ImageView
         android:id="@+id/camp_image"
         android:layout_width="411dp"
-        android:layout_height="192dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="-8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardContainer"
         app:srcCompat="@drawable/skouras_out" />
 
-
+    <!-- Camp Info -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/infoCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-32dp"
+        android:layout_marginTop="-64dp"
         app:shapeAppearance="@style/TopCornersRoundedCard"
         app:cardBackgroundColor="@color/color_surface"
         app:layout_constraintTop_toBottomOf="@id/camp_image"
@@ -67,7 +70,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="270dp"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -137,7 +140,7 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/camp_description_placeholder"
                 android:textColor="@color/color_on_surface"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -145,12 +148,13 @@
     <ScrollView
         android:id="@+id/scrollContent"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/infoCard"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
     <LinearLayout
         android:orientation="vertical"
@@ -169,9 +173,239 @@
         android:textSize="16sp"
         android:layout_marginBottom="8dp" />
 
+        <RadioGroup
+            android:id="@+id/periodRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/period1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/period_1_june_15_july_30"
+            android:padding="8dp" />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/period2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/period_2_july_1_july_15"
+            android:padding="8dp" />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/period3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/period_3_july_16_august_1"
+            android:padding="8dp" />
+        </RadioGroup>
+
+        <!-- Who's coming? header -->
+        <TextView
+            android:id="@+id/tvWho"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/who_s_coming"
+            android:textColor="@color/color_secondary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilPeriod" />
+
+        <include
+            android:id="@+id/rowTeen"
+            layout="@layout/row_counter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:tag="0" />
+
+        <include
+            android:id="@+id/rowChild"
+            layout="@layout/row_counter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:tag="1" />
+
+        <include
+            android:id="@+id/rowToddler"
+            layout="@layout/row_counter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:tag="2" />
+
+        <!-- Price Breakdown -->
+        <TextView
+            android:id="@+id/tvPriceBreakdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/price_breakdown"
+            android:textColor="@color/color_secondary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rowToddler" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/teenager"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/priceTeen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textStyle="bold"
+                android:textColor="@color/color_secondary"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.google.android.material.divider.MaterialDivider>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/child"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/priceChild"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textStyle="bold"
+                android:textColor="@color/color_secondary"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.google.android.material.divider.MaterialDivider>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/toddler"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/priceToddler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textStyle="bold"
+                android:textColor="@color/color_secondary"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.google.android.material.divider.MaterialDivider>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/taxes"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/taxes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textStyle="bold"
+                android:textColor="@color/color_secondary"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.google.android.material.divider.MaterialDivider>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/totalPrice"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/totalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textStyle="bold"
+                android:textColor="@color/color_secondary"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMessageCamp"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/color_primary"
+            android:text="@string/message_camp"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:cornerRadius="8dp" />
+
     </LinearLayout>
     </ScrollView>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

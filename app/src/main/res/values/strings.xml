@@ -20,4 +20,16 @@
     <string name="camp_name_placeholder">Camp Name Placeholder</string>
     <string name="camp_description_placeholder">Camp Description Placeholder</string>
     <string name="available_periods">Available Periods</string>
+    <string name="period_1_june_15_july_30">Period 1 (June 15 - July 30)</string>
+    <string name="period_2_july_1_july_15">Period 2 (July 1 - July 15)</string>
+    <string name="period_3_july_16_august_1">Period 3 (July 16 - August 1)</string>
+    <string name="price_breakdown">Price Breakdown</string>
+    <string name="teenager">Teenager</string>
+    <string name="child">Child</string>
+    <string name="toddler">Toddler</string>
+    <string name="taxes">Taxes</string>
+    <string name="totalPrice">Total Price\n</string>
+    <string name="search_camps">Search Camps</string>
+    <string name="message_camp">Message Camp</string>
+    <string name="i_have_a_discount_code">I have a discount code</string>
 </resources>

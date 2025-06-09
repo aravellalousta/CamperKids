@@ -143,6 +143,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                             intent.putExtra("teenCount", teenCount);
                             intent.putExtra("childCount", childCount);
                             intent.putExtra("toddCount", toddCount);
+                            intent.putExtra("reviewsNumber", randomNumForReviews);
 
                             startActivity(intent);
                         });
