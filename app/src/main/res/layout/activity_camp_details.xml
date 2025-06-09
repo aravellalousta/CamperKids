@@ -70,7 +70,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="270dp"
+            android:layout_height="275dp"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -137,7 +137,7 @@
                 android:id="@+id/tvCampDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:text="@string/camp_description_placeholder"
                 android:textColor="@color/color_on_surface"
                 android:textSize="14sp" />

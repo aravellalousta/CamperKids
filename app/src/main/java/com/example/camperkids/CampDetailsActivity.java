@@ -3,6 +3,7 @@ package com.example.camperkids;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
@@ -30,6 +31,7 @@ public class CampDetailsActivity extends AppCompatActivity {
 
         fillCampInfo(camp, reviewCount);
         fillUserSelections(periodId);
+        backButtonFunctionality();
     }
 
     private void fillUserSelections(int periodId) {
@@ -92,4 +94,10 @@ public class CampDetailsActivity extends AppCompatActivity {
         });
     }
 
+    private void backButtonFunctionality() {
+        ImageButton backBtn = findViewById(R.id.backButton);
+        backBtn.setOnClickListener(v -> {
+            finish();
+        });
+    }
 }
