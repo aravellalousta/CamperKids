@@ -17,4 +17,7 @@
     <string name="selected_visitors">Selected visitors</string>
     <string name="filter">Filter</string>
     <string name="sorting">Sorting</string>
+    <string name="camp_name_placeholder">Camp Name Placeholder</string>
+    <string name="camp_description_placeholder">Camp Description Placeholder</string>
+    <string name="available_periods">Available Periods</string>
 </resources>

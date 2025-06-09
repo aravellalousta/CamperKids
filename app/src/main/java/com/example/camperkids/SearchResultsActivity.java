@@ -130,6 +130,23 @@ public class SearchResultsActivity extends AppCompatActivity {
 
                         // Add card to the view
                         container.addView(card);
+
+                        // Start new activity when clicking on the card
+                        card.setOnClickListener(v -> {
+                            Intent intent = new Intent(SearchResultsActivity.this, CampDetailsActivity.class);
+
+                            // Pass camp object
+                            intent.putExtra("camp", camp);
+
+                            // Pass user selections
+                            intent.putExtra("periodId", periodId);
+                            intent.putExtra("teenCount", teenCount);
+                            intent.putExtra("childCount", childCount);
+                            intent.putExtra("toddCount", toddCount);
+
+                            startActivity(intent);
+                        });
+
                     });
                 }
             }

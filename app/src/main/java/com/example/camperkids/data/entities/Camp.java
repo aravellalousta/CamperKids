@@ -5,6 +5,8 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 import androidx.room.ColumnInfo;
 
+import java.io.Serializable;
+
 @Entity(
         tableName = "camps",
         foreignKeys = @ForeignKey(
@@ -13,7 +15,7 @@ import androidx.room.ColumnInfo;
                 childColumns = "region_id"
         )
 )
-public class Camp {
+public class Camp implements Serializable {
     @PrimaryKey
     public Integer id;
 
