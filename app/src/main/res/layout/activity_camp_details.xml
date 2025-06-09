@@ -133,6 +133,7 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
+
     <ScrollView
         android:id="@+id/scrollContent"
         android:layout_width="0dp"
@@ -151,6 +152,7 @@
         android:padding="16dp"
         android:background="@color/color_surface">
 
+        <!-- Camp Description -->
     <TextView
         android:id="@+id/tvCampDesc"
         android:layout_width="wrap_content"
@@ -161,7 +163,7 @@
         android:textColor="@color/color_on_surface"
         android:textSize="14sp" />
 
-    <!-- Available Periods -->
+    <!-- Available Periods / Radio Buttons -->
     <TextView
         android:id="@+id/tvAvailablePeriods"
         android:layout_width="wrap_content"
@@ -392,6 +394,7 @@
                 android:textSize="16sp"/>
         </LinearLayout>
 
+        <!-- Message Camp button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnMessageCamp"
             style="@style/Widget.Material3.Button"

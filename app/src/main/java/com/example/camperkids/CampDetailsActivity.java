@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.IdRes;
 import androidx.appcompat.app.AlertDialog;
@@ -15,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.camperkids.data.AppDatabase;
 import com.example.camperkids.data.entities.Camp;
 import com.example.camperkids.data.entities.CampAvailability;
-import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.radiobutton.MaterialRadioButton;
 
 import java.util.concurrent.Executors;
@@ -32,6 +30,9 @@ public class CampDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camp_details);
         db = AppDatabase.getInstance(getApplicationContext());
 
+        backButtonFunctionality();
+
+        // We need the camp and availability objects, as well as some user input options from before
         Intent intent = getIntent();
         Camp camp = (Camp) getIntent().getSerializableExtra("camp");
         availability = (CampAvailability) getIntent().getSerializableExtra("availability");
@@ -42,12 +43,17 @@ public class CampDetailsActivity extends AppCompatActivity {
         toddCount = intent.getIntExtra("toddCount", 0);
         int reviewCount = intent.getIntExtra("reviewsNumber", 0);
 
+        // Filling in all the details using the intents
         fillCampInfo(camp, reviewCount);
         fillUserSelections(camp, periodId);
-        backButtonFunctionality();
         fillPriceBreakdown(availability);
     }
 
+    /**
+     * Calculates and displays the price breakdown (teenager, child, toddler, taxes, total)
+     * based on provided availability and visitor counts. If availability is insufficient,
+     * it displays a dash and shows an alert.
+     */
     private void fillPriceBreakdown(CampAvailability availability) {
         TextView priceTeenager = findViewById(R.id.priceTeen);
         TextView priceChild = findViewById(R.id.priceChild);
@@ -108,6 +114,10 @@ public class CampDetailsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Sets the initial selected period, handles period radio button clicks to update camp availability
+     * and price breakdown, and sets up visitor counters for teenagers, children, and toddlers.
+     */
     private void fillUserSelections(Camp camp, int periodId) {
         MaterialRadioButton period1 = findViewById(R.id.period1);
         MaterialRadioButton period2 = findViewById(R.id.period2);
@@ -162,6 +172,10 @@ public class CampDetailsActivity extends AppCompatActivity {
         setupCounter(R.id.rowToddler,   categories[2], toddCount, newCount -> toddCount  = newCount);
     }
 
+    /**
+     * Populates the camp's main information section in the UI.
+     * Displays the camp's name, rating, number of reviews, location, and description.
+     */
     private void fillCampInfo(Camp camp, int reviewCount) {
         TextView campTitle = findViewById(R.id.tvCampTitle);
         RatingBar ratingBar = findViewById(R.id.ratingBar);
