@@ -70,7 +70,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="275dp"
+            android:layout_height="150dp"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -97,10 +97,7 @@
                     style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:isIndicator="true"
-                    android:numStars="5"
-                    android:rating="4.5"
-                    android:stepSize="0.5" />
+                    android:isIndicator="true" />
 
                 <TextView
                     android:id="@+id/tvReviewCount"
@@ -133,15 +130,6 @@
                 android:textSize="16sp"
                 app:drawableStartCompat="@drawable/check" />
 
-            <TextView
-                android:id="@+id/tvCampDesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="@string/camp_description_placeholder"
-                android:textColor="@color/color_on_surface"
-                android:textSize="14sp" />
-
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -163,6 +151,16 @@
         android:padding="16dp"
         android:background="@color/color_surface">
 
+    <TextView
+        android:id="@+id/tvCampDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/camp_description_placeholder"
+        android:textColor="@color/color_on_surface"
+        android:textSize="14sp" />
+
     <!-- Available Periods -->
     <TextView
         android:id="@+id/tvAvailablePeriods"
@@ -179,21 +177,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <com.google.android.material.checkbox.MaterialCheckBox
+        <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/period1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/period_1_june_15_july_30"
             android:padding="8dp" />
 
-        <com.google.android.material.checkbox.MaterialCheckBox
+        <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/period2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/period_2_july_1_july_15"
             android:padding="8dp" />
 
-        <com.google.android.material.checkbox.MaterialCheckBox
+        <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/period3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

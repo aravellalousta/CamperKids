@@ -23,17 +23,6 @@
             android:padding="16dp">
 
             <!-- Toolbar -->
-            <ImageButton
-                android:id="@+id/backButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/back_button_desc"
-                android:src="@drawable/arrow_back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <!-- Search Camps location -->
             <ImageView
                 android:id="@+id/logoToolbar"
                 android:layout_width="wrap_content"
@@ -41,9 +30,9 @@
                 android:src="@drawable/logo_toolbar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@id/backButton"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- Search Camps location -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilLocation"
                 android:layout_width="0dp"

@@ -34,8 +34,6 @@ public class SearchResultsActivity extends AppCompatActivity {
     private CampDao campDao;
     public int totalVisitorCount;
 
-    private CampAvailabilityDao campAvailabilityDao;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,6 +135,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
                             // Pass camp object
                             intent.putExtra("camp", camp);
+                            intent.putExtra("availability", availability);
 
                             // Pass user selections
                             intent.putExtra("periodId", periodId);
