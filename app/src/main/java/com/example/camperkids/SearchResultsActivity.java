@@ -18,9 +18,11 @@ import androidx.room.Database;
 import androidx.room.Room;
 
 import com.example.camperkids.data.AppDatabase;
+import com.example.camperkids.data.dao.CampAvailabilityDao;
 import com.example.camperkids.data.dao.RegionDao;
 import com.example.camperkids.data.dao.CampDao;
 import com.example.camperkids.data.entities.Camp;
+import com.example.camperkids.data.entities.CampAvailability;
 import com.example.camperkids.data.entities.Region;
 
 import java.util.List;
@@ -30,73 +32,108 @@ public class SearchResultsActivity extends AppCompatActivity {
     private AppDatabase db;
     private RegionDao regionDao;
     private CampDao campDao;
+    public int totalVisitorCount;
+
+    private CampAvailabilityDao campAvailabilityDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
+        backButtonFunctionality();
 
+        // In order to display the search results we need the inputs from the previous activity
         Intent intent = getIntent();
-
         Region region = (Region) intent.getSerializableExtra("region");
         String selectedPeriod = intent.getStringExtra("period");
+        int periodId = getPeriodIdFromLabel(selectedPeriod);
+
         int teenCount = intent.getIntExtra("teenCount", 0);
         int childCount = intent.getIntExtra("childCount", 0);
         int toddCount = intent.getIntExtra("toddCount", 0);
-        int totalVisitorCount = teenCount + childCount + toddCount;
+        totalVisitorCount = teenCount + childCount + toddCount;
 
+        // On the top of the activity we display the search criteria from the previous activity
         displaySearchCriteria(selectedPeriod, region, totalVisitorCount);
-        backButtonFunctionality();
 
-        displayCamps(region);
-
-
+        // Based on the search criteria and the database we find the available camps
+        getCampsByRegion(region, periodId, teenCount, childCount, toddCount);
     }
 
-    private void displayCamps(Region region) {
-        db = AppDatabase.getInstance(getApplicationContext());
+    // Assign an id on every period
+    private int getPeriodIdFromLabel(String selectedPeriod) {
+        if (selectedPeriod.contains("Period 1")) return 1;
+        else if (selectedPeriod.contains("Period 2")) return 2;
+        else if (selectedPeriod.contains("Period 3")) return 3;
+        else return -1;
+    }
 
+    /** Using the region from the search criteria and our database,
+     * we find all the camps in that region
+     */
+    private void getCampsByRegion(Region region, int periodId, int teenCount, int childCount, int toddCount) {
+        db = AppDatabase.getInstance(getApplicationContext());
         regionDao = db.regionDao();
         campDao = db.campDao();
+
         Executors.newSingleThreadExecutor().execute(() -> {
             int regionId = regionDao.getRegionIdByName(region.getName());
             List<Camp> campsInRegion = campDao.getCampsForRegion(regionId);
 
             runOnUiThread(() -> {
-                displayCampCards(campsInRegion);
+                displayCampCards(campsInRegion, periodId, teenCount, childCount, toddCount);
             });
         });
     }
 
-    private void displayCampCards(List<Camp> campsInRegion) {
-        int randomNumForReviews = new java.util.Random().nextInt(901) + 100; // Number of reviews ranging from 100 to 1000
-
+    /**
+     * After finding the camps in a region, this method displays a list of camp cards based on availability.
+     * For each camp, it checks available spots and if there are enough,
+     * it populates a card with camp details and adds it to the UI.
+     */
+    private void displayCampCards(List<Camp> campsInRegion, int periodId, int teenCount, int childCount, int toddCount) {
         LinearLayout container = findViewById(R.id.campCard);
         LayoutInflater inflater = LayoutInflater.from(this);
 
-        for (Camp camp : campsInRegion) {
-            View card = inflater.inflate(R.layout.camp_card, container, false);
+        Executors.newSingleThreadExecutor().execute(() -> {
+            for (Camp camp : campsInRegion) {
+                CampAvailability availability = db.campAvailabilityDao()
+                        .getAvailabilityForCampAndPeriod(camp.getId(), periodId);
 
-            // Populate the cards content
-            TextView name = card.findViewById(R.id.tvCampName);
-            TextView location = card.findViewById(R.id.tvLocation);
-            TextView reviewCount = card.findViewById(R.id.tvReviewCount);
-            TextView cert = card.findViewById(R.id.tvCert);
-            TextView price = card.findViewById(R.id.tvPrice);
-            RatingBar ratingBar = card.findViewById(R.id.ratingBar);
-            ImageView image = card.findViewById(R.id.imageCamp);
+                // Here we populate the card
+                if (availability.getAvailableSpots() >= totalVisitorCount) {
+                    runOnUiThread(() -> {
+                        View card = inflater.inflate(R.layout.camp_card, container, false);
 
-            name.setText(camp.getName());
-            location.setText(camp.getVillageName());
-            reviewCount.setText("(" + randomNumForReviews + " reviews)"); //set random
-            cert.setText(R.string.kepa_certified_instructors);
-            // price.setText(camp.getPrice()); TODO PRICE NEEDS CAMP AVAILABILITY TABLE
-            ratingBar.setRating(camp.getRating().floatValue());
-            setCampLogo(camp, image);
+                        TextView name = card.findViewById(R.id.tvCampName);
+                        TextView location = card.findViewById(R.id.tvLocation);
+                        TextView reviewCount = card.findViewById(R.id.tvReviewCount);
+                        TextView cert = card.findViewById(R.id.tvCert);
+                        TextView priceTv = card.findViewById(R.id.tvPrice);
+                        RatingBar ratingBar = card.findViewById(R.id.ratingBar);
+                        ImageView image = card.findViewById(R.id.imageCamp);
 
-            // Add the card to the container
-            container.addView(card);
-        }
+                        // Set values for all the elements in the card
+                        int randomNumForReviews = new java.util.Random().nextInt(901) + 100;
+                        name.setText(camp.getName());
+                        location.setText(camp.getVillageName());
+                        reviewCount.setText("(" + randomNumForReviews + " reviews)");
+                        cert.setText(R.string.kepa_certified_instructors);
+                        ratingBar.setRating(camp.getRating().floatValue());
+                        setCampLogo(camp, image);
+
+                        int totalPrice = teenCount * availability.getPriceTeenager()
+                                + childCount * availability.getPriceChild()
+                                + toddCount * availability.getPriceToddler();
+
+                        priceTv.setText("Total: €" + totalPrice);
+
+                        // Add card to the view
+                        container.addView(card);
+                    });
+                }
+            }
+        });
     }
 
     private void setCampLogo(Camp camp, ImageView imageView) {

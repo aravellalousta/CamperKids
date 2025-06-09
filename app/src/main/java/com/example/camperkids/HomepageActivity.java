@@ -53,6 +53,7 @@ public class HomepageActivity extends AppCompatActivity {
         setupCounter(R.id.rowToddler,   categories[2], newCount -> toddCount  = newCount);
     }
 
+    // Setting up the options of the dropdown
     private void dropdownFunctionality() {
         AutoCompleteTextView periodDropdown = findViewById(R.id.periodDropdown);
 
@@ -76,8 +77,13 @@ public class HomepageActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Handles the search input and search button. Uses the entered region keyword,
+     * searches the database, and navigates to SearchResultsActivity if the region exists.
+     * If the region is not found or keyword is empty, it shows a Toast.
+     */
     private void searchFieldFunctionality() {
-        // Searching for locations
+
         TextInputEditText searchInput = findViewById(R.id.etLocation);
         Button searchButton = findViewById(R.id.btnSearch);
 
@@ -91,7 +97,6 @@ public class HomepageActivity extends AppCompatActivity {
             db = AppDatabase.getInstance(getApplicationContext());
             regionDao = db.regionDao();
 
-            // Run Room query in background
             Executors.newSingleThreadExecutor().execute(() -> {
                 Region region = regionDao.getRegionByName(keyword);
 
@@ -105,7 +110,6 @@ public class HomepageActivity extends AppCompatActivity {
                     intent.putExtra("childCount", childCount);
                     intent.putExtra("toddCount", toddCount);
                     startActivity(intent);
-
                 }
             });
 
@@ -113,7 +117,6 @@ public class HomepageActivity extends AppCompatActivity {
 
     }
 
-    // callback interface for count changes
     private interface CounterCallback { void onCountChanged(int newCount); }
 
     private void setupCounter(@IdRes int rowId, String label, CounterCallback cb) {

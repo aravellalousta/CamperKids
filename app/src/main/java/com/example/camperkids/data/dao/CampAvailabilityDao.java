@@ -25,6 +25,10 @@ public interface CampAvailabilityDao {
     @Query("SELECT * FROM camp_availability WHERE period_id = :periodId")
     List<CampAvailability> getAvailabilitiesForPeriod(int periodId);
 
+    @Query("SELECT * FROM camp_availability WHERE camp_id = :campId AND period_id = :periodId LIMIT 1")
+    CampAvailability getAvailabilityForCampAndPeriod(int campId, int periodId);
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAvailability(CampAvailability availability);
 

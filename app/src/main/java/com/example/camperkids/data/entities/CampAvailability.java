@@ -33,4 +33,60 @@ public class CampAvailability {
 
     @ColumnInfo(name = "price_toddler")
     public Integer priceToddler;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public int getCampId() {
+        return campId;
+    }
+
+    public void setCampId(int campId) {
+        this.campId = campId;
+    }
+
+    public int getPeriodId() {
+        return periodId;
+    }
+
+    public void setPeriodId(int periodId) {
+        this.periodId = periodId;
+    }
+
+    public Integer getAvailableSpots() {
+        return availableSpots;
+    }
+
+    public void setAvailableSpots(Integer availableSpots) {
+        this.availableSpots = availableSpots;
+    }
+
+    public Integer getPriceTeenager() {
+        return priceTeenager;
+    }
+
+    public void setPriceTeenager(Integer priceTeenager) {
+        this.priceTeenager = priceTeenager;
+    }
+
+    public Integer getPriceChild() {
+        return priceChild;
+    }
+
+    public void setPriceChild(Integer priceChild) {
+        this.priceChild = priceChild;
+    }
+
+    public Integer getPriceToddler() {
+        return priceToddler;
+    }
+
+    public void setPriceToddler(Integer priceToddler) {
+        this.priceToddler = priceToddler;
+    }
 }
