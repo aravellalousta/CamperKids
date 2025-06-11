@@ -27,6 +27,7 @@ public class HomepageActivity extends AppCompatActivity {
     private String selectedPeriod = null;
 
     private int teenCount, childCount, toddCount;
+    private int totalCount = 0;
     private String[] categories;
 
     @Override
@@ -83,14 +84,21 @@ public class HomepageActivity extends AppCompatActivity {
      * If the region is not found or keyword is empty, it shows a Toast.
      */
     private void searchFieldFunctionality() {
-
+        AutoCompleteTextView periodDropdown = findViewById(R.id.periodDropdown);
         TextInputEditText searchInput = findViewById(R.id.etLocation);
         Button searchButton = findViewById(R.id.btnSearch);
 
         searchButton.setOnClickListener(v -> {
+            totalCount = teenCount + childCount + toddCount;
             String keyword = String.valueOf(searchInput.getText());
             if (keyword.isEmpty()) {
-                Toast.makeText(this, "Please enter a region name", Toast.LENGTH_SHORT).show();
+                searchInput.setError("Please enter a region name");
+                return;
+            } else if (selectedPeriod == null){
+                periodDropdown.setError("Please select a time period");
+                return;
+            } else if (totalCount == 0){
+                Toast.makeText(this, "Please enter the amount of kids attending", Toast.LENGTH_SHORT).show();
                 return;
             }
 
