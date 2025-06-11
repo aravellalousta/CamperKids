@@ -17,6 +17,7 @@ import com.example.camperkids.data.AppDatabase;
 import com.example.camperkids.data.dao.RegionDao;
 import com.example.camperkids.data.entities.Region;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.concurrent.Executors;
 
@@ -57,6 +58,8 @@ public class HomepageActivity extends AppCompatActivity {
     // Setting up the options of the dropdown
     private void dropdownFunctionality() {
         AutoCompleteTextView periodDropdown = findViewById(R.id.periodDropdown);
+        TextInputLayout tilPeriod = findViewById(R.id.tilPeriod);
+
 
         String[] timePeriods = new String[] {
                 "Period 1 (June 15 - July 30)",
@@ -75,6 +78,7 @@ public class HomepageActivity extends AppCompatActivity {
 
         periodDropdown.setOnItemClickListener((parent, view, position, id) -> {
             selectedPeriod = (String) parent.getItemAtPosition(position);
+            tilPeriod.setError(null);
         });
     }
 
@@ -84,9 +88,10 @@ public class HomepageActivity extends AppCompatActivity {
      * If the region is not found or keyword is empty, it shows a Toast.
      */
     private void searchFieldFunctionality() {
-        AutoCompleteTextView periodDropdown = findViewById(R.id.periodDropdown);
         TextInputEditText searchInput = findViewById(R.id.etLocation);
         Button searchButton = findViewById(R.id.btnSearch);
+        TextInputLayout tilPeriod = findViewById(R.id.tilPeriod);
+
 
         searchButton.setOnClickListener(v -> {
             totalCount = teenCount + childCount + toddCount;
@@ -95,7 +100,7 @@ public class HomepageActivity extends AppCompatActivity {
                 searchInput.setError("Please enter a region name");
                 return;
             } else if (selectedPeriod == null){
-                periodDropdown.setError("Please select a time period");
+                tilPeriod.setError("Please select a time period");
                 return;
             } else if (totalCount == 0){
                 Toast.makeText(this, "Please enter the amount of kids attending", Toast.LENGTH_SHORT).show();
