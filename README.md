@@ -4,7 +4,7 @@
 
 > ⚠️ Note: This is a student project developed for the **Interactive applications for mobile devices** course, MSc. Technologies of Interactive Stystems. While functional, it is not yet production-ready.
 
-Figma Design: https://www.figma.com/design/Gh5q2ewP1HVjeyMaGEKMJx/Camper-Kids---Assignment?node-id=107-1894&t=NWRoFqcaFlJeKwkf-1 
+[Figma Design](https://www.figma.com/design/Gh5q2ewP1HVjeyMaGEKMJx/Camper-Kids---Assignment?node-id=107-1894&t=NWRoFqcaFlJeKwkf-1)
 ---
 
 ## 📱 Features
