@@ -1,6 +1,7 @@
 package com.example.camperkids;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.health.SystemHealthManager;
 import android.view.LayoutInflater;
@@ -38,6 +39,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         backButtonFunctionality();
 
         // In order to display the search results we need the inputs from the previous activity
